@@ -30,7 +30,8 @@ setup(
     'console_scripts': [
         'simulator = boat_simulator.boat_sim_node:main',
         'teleop = boat_simulator.teleop_node:main',
-        'detector = boat_simulator.gate_detector_node:main', # <-- Add this line
+        'detector = boat_simulator.gate_detector_node:main',
+        'controller = boat_simulator.gate_controller_node:main', # <-- Add this line
     ],
 },
 )
