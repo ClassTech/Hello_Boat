@@ -1,4 +1,5 @@
 import os
+from glob import glob  # <-- CRITICAL: Add this import
 from setuptools import find_packages, setup
 
 package_name = 'boat_simulator'
@@ -11,18 +12,12 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-
-        # --- EXPLICIT FILE PATHS ---
-        # This is the new, more robust way to specify files.
-        (os.path.join('share', package_name, 'launch'), [
-            os.path.join('launch', 'boat_sim.launch.py')
-        ]),
-        (os.path.join('share', package_name, 'description'), [
-            os.path.join('description', 'boat.urdf')
-        ]),
-        (os.path.join('share', package_name, 'rviz'), [
-            os.path.join('rviz', 'boat_sim.rviz')
-        ]),
+        
+        # This section now correctly finds all your asset files
+        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*.py'))),
+        (os.path.join('share', package_name, 'description'), glob(os.path.join('description', '*.urdf'))),
+        (os.path.join('share', package_name, 'rviz'), glob(os.path.join('rviz', '*.rviz'))),
+        (os.path.join('share', package_name, 'worlds'), glob(os.path.join('worlds', '*.world'))),
     ],
     install_requires=['setuptools'],
     zip_safe=True,

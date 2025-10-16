@@ -1,6 +1,11 @@
 <?xml version="1.0"?>
 <robot name="boat">
+
   <link name="base_link">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.5" ixy="0.0" ixz="0.0" iyy="1.0" iyz="0.0" izz="0.5"/>
+    </inertial>
     <visual>
       <geometry>
         <box size="1.0 0.5 0.3" />
@@ -9,5 +14,68 @@
         <color rgba="1.0 0.0 0.0 1.0" />
       </material>
     </visual>
+    <collision>
+      <geometry>
+        <box size="1.0 0.5 0.3" />
+      </geometry>
+    </collision>
   </link>
+
+  <link name="camera_link">
+    <visual>
+      <geometry>
+        <box size="0.05 0.05 0.05"/>
+      </geometry>
+      <material name="black">
+          <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+    <origin xyz="0.5 0 0.2" rpy="0 0 0"/>
+  </joint>
+
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="my_camera">
+      <update_rate>30.0</update_rate>
+      <camera>
+        <horizontal_fov>1.39626</horizontal_fov>
+        <image>
+          <width>800</width>
+          <height>600</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.02</near>
+          <far>300</far>
+        </clip>
+      </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros>
+          <namespace>/</namespace>
+          <image_topic>camera/image_raw</image_topic>
+          <camera_info_topic>camera/camera_info</camera_info_topic>
+        </ros>
+        <frame_name>camera_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_planar_move" filename="libgazebo_ros_planar_move.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+      <command_topic>cmd_vel</command_topic>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+    </plugin>
+  </gazebo>
+
 </robot>
