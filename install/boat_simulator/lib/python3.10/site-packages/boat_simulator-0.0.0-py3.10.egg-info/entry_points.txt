@@ -1,0 +1,5 @@
+[console_scripts]
+detector = boat_simulator.gate_detector_node:main
+simulator = boat_simulator.boat_sim_node:main
+teleop = boat_simulator.teleop_node:main
+

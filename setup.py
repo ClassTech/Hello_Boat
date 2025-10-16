@@ -27,9 +27,10 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-        'console_scripts': [
-            'simulator = boat_simulator.boat_sim_node:main',
-            'teleop = boat_simulator.teleop_node:main',
-        ],
-    },
+    'console_scripts': [
+        'simulator = boat_simulator.boat_sim_node:main',
+        'teleop = boat_simulator.teleop_node:main',
+        'detector = boat_simulator.gate_detector_node:main', # <-- Add this line
+    ],
+},
 )
