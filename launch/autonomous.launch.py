@@ -1,7 +1,10 @@
 import os
+import random
+import math
 from ament_index_python.packages import get_package_share_directory
 from launch import LaunchDescription
-from launch.actions import IncludeLaunchDescription
+from launch.actions import ExecuteProcess, IncludeLaunchDescription, TimerAction, RegisterEventHandler
+from launch.event_handlers import OnProcessExit
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
@@ -10,7 +13,19 @@ def generate_launch_description():
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
     pkg_boat_simulator = get_package_share_directory(package_name)
 
-    # Gazebo launch
+    # Calculate a random starting pose
+    start_x = "-5.0"
+    start_y = str(random.uniform(-3.0, 3.0))
+    start_yaw = str(random.uniform(-math.pi / 2, math.pi / 2))
+
+    # --- THIS IS THE CORRECTED ACTION ---
+    # We wrap the pkill command in a shell script that always succeeds.
+    kill_gazebo_cmd = ExecuteProcess(
+        cmd=['bash', '-c', 'pkill -9 gz || true'],
+        output='screen'
+    )
+    # ------------------------------------
+
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py')
@@ -18,57 +33,47 @@ def generate_launch_description():
         launch_arguments={'world': os.path.join(pkg_boat_simulator, 'worlds', 'gate.world')}.items()
     )
 
-    # Robot State Publisher
-    urdf_file_path = os.path.join(pkg_boat_simulator, 'description', 'boat.urdf')
     robot_state_publisher = Node(
         package='robot_state_publisher',
         executable='robot_state_publisher',
-        name='robot_state_publisher',
-        output='screen',
-        parameters=[{'robot_description': open(urdf_file_path).read()}]
+        parameters=[{'robot_description': open(os.path.join(pkg_boat_simulator, 'description', 'boat.urdf')).read()}]
     )
 
-    # Spawn Entity
-    spawn_entity = Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        arguments=['-topic', 'robot_description', '-entity', 'boat'],
-        output='screen'
-    )
-
-    # Gate Detector Node
-    detector_node = Node(
-        package=package_name,
-        executable='detector',
-        name='gate_detector_node',
-        output='screen'
-    )
-
-    # Gate Controller Node
-    controller_node = Node(
-        package=package_name,
-        executable='controller',
-        name='gate_controller_node',
-        output='screen'
-    )
-
-    # --- THIS IS THE NEW NODE YOU ARE ADDING ---
-    image_view_node = Node(
-        package='rqt_gui',
-        executable='rqt_gui',
-        name='image_viewer',
-        arguments=['--standalone', 'rqt_image_view'],
-        remappings=[
-            ('/image', '/my_camera/image_raw') # Remap the default topic to our camera
+    delayed_actions = TimerAction(
+        period=5.0,
+        actions=[
+            Node(
+                package='gazebo_ros',
+                executable='spawn_entity.py',
+                arguments=['-topic', 'robot_description', '-entity', 'boat', '-x', start_x, '-y', start_y, '-Y', start_yaw],
+                output='screen'
+            ),
+            Node(
+                package=package_name,
+                executable='detector',
+                name='gate_detector_node',
+                output='screen'
+            ),
+            Node(
+                package=package_name,
+                executable='controller',
+                name='gate_controller_node',
+                output='screen'
+            ),
         ]
     )
-    # ---------------------------------------------
+
+    # Event handler to chain the actions sequentially
+    run_gazebo_handler = RegisterEventHandler(
+        event_handler=OnProcessExit(
+            target_action=kill_gazebo_cmd,
+            on_exit=[gazebo]
+        )
+    )
 
     return LaunchDescription([
-        gazebo,
+        kill_gazebo_cmd,
+        run_gazebo_handler,
         robot_state_publisher,
-        spawn_entity,
-        detector_node,
-        controller_node,
-        image_view_node, # Add the new node to the launch list
+        delayed_actions,
     ])
