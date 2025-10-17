@@ -9,28 +9,39 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 
 def generate_launch_description():
-    package_name = 'boat_simulator'
+    pkg_boat_simulator = get_package_share_directory('boat_simulator')
+    pkg_boat_gz_plugin = get_package_share_directory('boat_gz_plugin')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
-    pkg_boat_simulator = get_package_share_directory(package_name)
 
-    # Calculate a random starting pose
+    # --- Calculate a random starting pose ---
     start_x = "-5.0"
     start_y = str(random.uniform(-3.0, 3.0))
     start_yaw = str(random.uniform(-math.pi / 2, math.pi / 2))
 
-    # --- THIS IS THE CORRECTED ACTION ---
-    # We wrap the pkill command in a shell script that always succeeds.
+    # --- Define all the actions we want to run ---
     kill_gazebo_cmd = ExecuteProcess(
         cmd=['bash', '-c', 'pkill -9 gz || true'],
         output='screen'
     )
-    # ------------------------------------
+
+    # Find the path to our compiled C++ plugin
+    plugin_path = os.path.join(
+        pkg_boat_gz_plugin,
+        '..',  # Go up from 'share' to the root of the install space
+        'lib',
+        'boat_gz_plugin',
+        'libsim_control_plugin.so' # The compiled plugin file
+    )
 
     gazebo = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gazebo.launch.py')
         ),
-        launch_arguments={'world': os.path.join(pkg_boat_simulator, 'worlds', 'gate.world')}.items()
+        # Add the --gui-plugin argument to load our C++ plugin
+        launch_arguments={
+            'world': os.path.join(pkg_boat_simulator, 'worlds', 'gate.world'),
+            'extra_gazebo_args': f'--gui-plugin {plugin_path}'
+        }.items()
     )
 
     robot_state_publisher = Node(
@@ -49,13 +60,13 @@ def generate_launch_description():
                 output='screen'
             ),
             Node(
-                package=package_name,
+                package='boat_simulator',
                 executable='detector',
                 name='gate_detector_node',
                 output='screen'
             ),
             Node(
-                package=package_name,
+                package='boat_simulator',
                 executable='controller',
                 name='gate_controller_node',
                 output='screen'
@@ -63,7 +74,6 @@ def generate_launch_description():
         ]
     )
 
-    # Event handler to chain the actions sequentially
     run_gazebo_handler = RegisterEventHandler(
         event_handler=OnProcessExit(
             target_action=kill_gazebo_cmd,
