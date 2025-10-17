@@ -3,6 +3,7 @@ setup.cfg
 setup.py
 boat_simulator/__init__.py
 boat_simulator/boat_sim_node.py
+boat_simulator/gate_controller_node.py
 boat_simulator/gate_detector_node.py
 boat_simulator/teleop_node.py
 build/boat_simulator/boat_simulator.egg-info/PKG-INFO
@@ -13,6 +14,7 @@ build/boat_simulator/boat_simulator.egg-info/requires.txt
 build/boat_simulator/boat_simulator.egg-info/top_level.txt
 build/boat_simulator/boat_simulator.egg-info/zip-safe
 description/boat.urdf
+launch/autonomous.launch.py
 launch/boat_sim.launch.py
 launch/gazebo.launch.py
 resource/boat_simulator

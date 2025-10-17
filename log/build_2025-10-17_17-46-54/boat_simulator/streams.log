@@ -1,0 +1,59 @@
+[0.467s] Invoking command in '/home/parallels/ros2_ws/src/boat_simulator': PYTHONPATH=/home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/boat_simulator build --build-base /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build install --record /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/install.log --single-version-externally-managed install_data
+[0.655s] running egg_info
+[0.655s] creating build/boat_simulator/boat_simulator.egg-info
+[0.655s] writing build/boat_simulator/boat_simulator.egg-info/PKG-INFO
+[0.655s] writing dependency_links to build/boat_simulator/boat_simulator.egg-info/dependency_links.txt
+[0.655s] writing entry points to build/boat_simulator/boat_simulator.egg-info/entry_points.txt
+[0.655s] writing requirements to build/boat_simulator/boat_simulator.egg-info/requires.txt
+[0.656s] writing top-level names to build/boat_simulator/boat_simulator.egg-info/top_level.txt
+[0.656s] writing manifest file 'build/boat_simulator/boat_simulator.egg-info/SOURCES.txt'
+[0.657s] reading manifest file 'build/boat_simulator/boat_simulator.egg-info/SOURCES.txt'
+[0.658s] writing manifest file 'build/boat_simulator/boat_simulator.egg-info/SOURCES.txt'
+[0.658s] running build
+[0.658s] running build_py
+[0.658s] creating /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build
+[0.658s] creating /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib
+[0.658s] creating /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+[0.658s] copying boat_simulator/gate_controller_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+[0.658s] copying boat_simulator/teleop_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+[0.658s] copying boat_simulator/boat_sim_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+[0.658s] copying boat_simulator/__init__.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+[0.658s] copying boat_simulator/gate_detector_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+[0.659s] running install
+[0.659s] running install_lib
+[0.660s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+[0.660s] copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/gate_controller_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+[0.660s] copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/teleop_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+[0.660s] copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/boat_sim_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+[0.660s] copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/__init__.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+[0.660s] copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/gate_detector_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+[0.661s] byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/gate_controller_node.py to gate_controller_node.cpython-310.pyc
+[0.662s] byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/teleop_node.py to teleop_node.cpython-310.pyc
+[0.662s] byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/boat_sim_node.py to boat_sim_node.cpython-310.pyc
+[0.663s] byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/__init__.py to __init__.cpython-310.pyc
+[0.663s] byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/gate_detector_node.py to gate_detector_node.cpython-310.pyc
+[0.663s] running install_data
+[0.663s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/ament_index
+[0.664s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/ament_index/resource_index
+[0.664s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/ament_index/resource_index/packages
+[0.664s] copying resource/boat_simulator -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/ament_index/resource_index/packages
+[0.664s] copying package.xml -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator
+[0.664s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
+[0.664s] copying launch/boat_sim.launch.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
+[0.664s] copying launch/gazebo.launch.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
+[0.664s] copying launch/autonomous.launch.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
+[0.664s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/description
+[0.664s] copying description/boat.urdf -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/description
+[0.664s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/rviz
+[0.664s] copying rviz/boat_sim.rviz -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/rviz
+[0.664s] creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/worlds
+[0.665s] copying worlds/gate.world -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/worlds
+[0.665s] running install_egg_info
+[0.666s] Copying build/boat_simulator/boat_simulator.egg-info to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator-0.0.0-py3.10.egg-info
+[0.667s] running install_scripts
+[0.684s] Installing controller script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
+[0.684s] Installing detector script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
+[0.684s] Installing simulator script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
+[0.684s] Installing teleop script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
+[0.684s] writing list of installed files to '/home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/install.log'
+[0.704s] Invoked command in '/home/parallels/ros2_ws/src/boat_simulator' returned '0': PYTHONPATH=/home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/prefix_override:/usr/lib/python3/dist-packages/colcon_core/task/python/colcon_distutils_commands:/home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 -W ignore:setup.py install is deprecated -W ignore:easy_install command is deprecated setup.py egg_info --egg-base build/boat_simulator build --build-base /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build install --record /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/install.log --single-version-externally-managed install_data

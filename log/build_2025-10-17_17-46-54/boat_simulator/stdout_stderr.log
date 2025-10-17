@@ -13,6 +13,7 @@ running build_py
 creating /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build
 creating /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib
 creating /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
+copying boat_simulator/gate_controller_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
 copying boat_simulator/teleop_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
 copying boat_simulator/boat_sim_node.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
 copying boat_simulator/__init__.py -> /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator
@@ -20,10 +21,12 @@ copying boat_simulator/gate_detector_node.py -> /home/parallels/ros2_ws/src/boat
 running install
 running install_lib
 creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/gate_controller_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
 copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/teleop_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
 copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/boat_sim_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
 copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/__init__.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
 copying /home/parallels/ros2_ws/src/boat_simulator/build/boat_simulator/build/lib/boat_simulator/gate_detector_node.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator
+byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/gate_controller_node.py to gate_controller_node.cpython-310.pyc
 byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/teleop_node.py to teleop_node.cpython-310.pyc
 byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/boat_sim_node.py to boat_sim_node.cpython-310.pyc
 byte-compiling /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator/__init__.py to __init__.cpython-310.pyc
@@ -37,6 +40,7 @@ copying package.xml -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_s
 creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
 copying launch/boat_sim.launch.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
 copying launch/gazebo.launch.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
+copying launch/autonomous.launch.py -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/launch
 creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/description
 copying description/boat.urdf -> /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/description
 creating /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/share/boat_simulator/rviz
@@ -46,6 +50,7 @@ copying worlds/gate.world -> /home/parallels/ros2_ws/src/boat_simulator/install/
 running install_egg_info
 Copying build/boat_simulator/boat_simulator.egg-info to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/python3.10/site-packages/boat_simulator-0.0.0-py3.10.egg-info
 running install_scripts
+Installing controller script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
 Installing detector script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
 Installing simulator script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
 Installing teleop script to /home/parallels/ros2_ws/src/boat_simulator/install/boat_simulator/lib/boat_simulator
