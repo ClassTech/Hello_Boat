@@ -1,5 +1,4 @@
 import os
-from glob import glob  # <-- CRITICAL: Add this import
 from setuptools import find_packages, setup
 
 package_name = 'boat_simulator'
@@ -12,12 +11,24 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
-        
-        # This section now correctly finds all your asset files
-        (os.path.join('share', package_name, 'launch'), glob(os.path.join('launch', '*.py'))),
-        (os.path.join('share', package_name, 'description'), glob(os.path.join('description', '*.urdf'))),
-        (os.path.join('share', package_name, 'rviz'), glob(os.path.join('rviz', '*.rviz'))),
-        (os.path.join('share', package_name, 'worlds'), glob(os.path.join('worlds', '*.world'))),
+
+        # --- EXPLICIT FILE PATHS ---
+        # This is the most robust, non-magic way to specify every file.
+
+        (os.path.join('share', package_name, 'launch'), [
+            'launch/autonomous.launch.py',
+            'launch/boat_sim.launch.py',
+            'launch/gazebo.launch.py'
+        ]),
+        (os.path.join('share', package_name, 'description'), [
+            'description/boat.urdf'
+        ]),
+        (os.path.join('share', package_name, 'rviz'), [
+            'rviz/boat_sim.rviz'
+        ]),
+        (os.path.join('share', package_name, 'worlds'), [
+            'worlds/gate.world'
+        ]),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
@@ -27,11 +38,11 @@ setup(
     license='TODO: License declaration',
     tests_require=['pytest'],
     entry_points={
-    'console_scripts': [
-        'simulator = boat_simulator.boat_sim_node:main',
-        'teleop = boat_simulator.teleop_node:main',
-        'detector = boat_simulator.gate_detector_node:main',
-        'controller = boat_simulator.gate_controller_node:main', # <-- Add this line
-    ],
-},
+        'console_scripts': [
+            'simulator = boat_simulator.boat_sim_node:main',
+            'teleop = boat_simulator.teleop_node:main',
+            'detector = boat_simulator.gate_detector_node:main',
+            'controller = boat_simulator.gate_controller_node:main',
+        ],
+    },
 )

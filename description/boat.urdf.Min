@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<robot name="submarine">
+
+  <link name="base_link">
+    <visual>
+      <geometry> <box size="0.2032 0.0508 0.127"/> </geometry>
+      <material name="grey"> <color rgba="0.5 0.5 0.5 1.0"/> </material>
+    </visual>
+    <collision> <geometry> <box size="0.2032 0.0508 0.127"/> </geometry> </collision>
+    <inertial>
+      <mass value="2.0"/>
+      <inertia ixx="0.015" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.005"/>
+    </inertial>
+  </link>
+
+  <link name="pvc_frame">
+    <visual>
+      <geometry> <box size="0.2286 0.2286 0.2286"/> </geometry>
+      <material name="white"> <color rgba="0.9 0.9 0.9 0.5"/> </material>
+    </visual>
+    <inertial>
+      <mass value="1.5"/>
+      <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="camera_link">
+    <visual> <geometry><box size="0.02 0.02 0.02"/></geometry> <material name="black"><color rgba="0 0 0 1"/></material> </visual>
+  </link>
+
+  <link name="left_wheel_link"/>
+  <link name="right_wheel_link"/>
+
+  <joint name="frame_joint" type="fixed"> <parent link="base_link"/> <child link="pvc_frame"/> </joint>
+
+  <joint name="camera_joint" type="fixed">
+    <parent link="base_link"/> <child link="camera_link"/>
+    <origin xyz="0.1016 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="left_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="left_wheel_link"/>
+    <origin xyz="0 0.1905 0" rpy="-1.5707 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <joint name="right_wheel_joint" type="continuous">
+    <parent link="base_link"/>
+    <child link="right_wheel_link"/>
+    <origin xyz="0 -0.1905 0" rpy="-1.5707 0 0"/>
+    <axis xyz="0 0 1"/>
+  </joint>
+
+  <gazebo reference="camera_link">
+    <sensor type="camera" name="my_camera">
+      <update_rate>30.0</update_rate>
+      <camera> <horizontal_fov>1.8</horizontal_fov> <image><width>800</width><height>600</height></image> <clip><near>0.02</near><far>300</far></clip> </camera>
+      <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+        <ros><namespace>/</namespace><image_topic>my_camera/image_raw</image_topic></ros>
+        <frame_name>camera_link</frame_name>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="gazebo_ros_diff_drive" filename="libgazebo_ros_diff_drive.so">
+      <left_joint>left_wheel_joint</left_joint>
+      <right_joint>right_wheel_joint</right_joint>
+      <wheel_separation>0.381</wheel_separation>
+      <wheel_diameter>0.1</wheel_diameter>
+      <command_topic>cmd_vel</command_topic>
+      <odometry_topic>odom</odometry_topic>
+      <odometry_frame>odom</odometry_frame>
+      <robot_base_frame>base_link</robot_base_frame>
+      <publish_odom>true</publish_odom>
+      <publish_odom_tf>true</publish_odom_tf>
+      <max_wheel_torque>1.35</max_wheel_torque>
+      <max_wheel_acceleration>1.0</max_wheel_acceleration>
+    </plugin>
+  </gazebo>
+</robot>
